@@ -5,11 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+ipykernel = "*"
 
 [packages]
 flask = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+basilica = "*"
+tweepy = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
