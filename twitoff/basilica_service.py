@@ -11,10 +11,13 @@ assert load_dotenv(), 'failed to initialize environment'
 BASILICA_KEY = os.getenv('BASILICA_KEY')
 assert BASILICA_KEY is not None, 'falied to load BASILICA_KEY from environment'
 
-basilica_connection = basilica.Connection(BASILICA_KEY)
+
+def basilica_api():
+    return basilica.Connection(BASILICA_KEY)
+
 
 if __name__ == '__main__':
-    with basilica_connection as c:
+    with basilica_api() as c:
         sentences = ["Hello world!", "How are you?"]
         embeddings = c.embed_sentences(sentences)
         print(type(embeddings))
