@@ -13,6 +13,7 @@ tweeter_routes = Blueprint('tweeter_routes', __name__)
 @tweeter_routes.route('/tweeter', methods=['GET', 'POST'])
 def tweeter():
     """Returns rendered tweeter.html template."""
+    messages = []
     if request.method == "POST":
         handle = request.form['handle']
         if (handle is not None and isinstance(handle, str)
@@ -21,4 +22,17 @@ def tweeter():
                 new_tweeter = Tweeter(handle)
                 db.session.add(new_tweeter)
                 db.session.commit()
-    return render_template('tweeter.html', tweeters=get_all(Tweeter))
+        else:
+            message = 'Missing or invalid handle.'
+            messages.append(message)
+    return render_template(
+        'tweeter.html',
+        tweeters=get_all(Tweeter),
+        messages=messages
+    )
+
+
+@tweeter_routes.route('/tweeter/<handle>')
+def a_tweeter():
+    """Renders a specific users tweets."""
+    pass
