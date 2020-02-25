@@ -9,6 +9,10 @@ from twitoff.routes.home_routes import home_routes
 from twitoff.routes.tweet_routes import tweet_routes
 from twitoff.routes.tweeter_routes import tweeter_routes
 
+DB_FILE = os.path.join(
+    os.path.dirname(__file__), '..', 'twitoff.db'
+)
+
 
 def create_app():
     """Create and configure a Flask application instance.
@@ -20,7 +24,8 @@ def create_app():
 
     # configure database
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitoff.db'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/guest/lambda/git/ds11u3s3-twitoff/twitoff.db'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/guest/lambda/git/ds11u3s3-twitoff/twitoff.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DB_FILE
     db.init_app(app)
     migrate.init_app(app, db)
 
