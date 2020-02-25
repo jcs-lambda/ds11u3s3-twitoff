@@ -41,6 +41,7 @@ class Tweeter(db.Model):
     # validation properties
     _messages = []
     _handle_pattern = re.compile('^[a-zA-Z0-9_]{1,15}$')
+    _name_pattern = re.compile('^.{,50}$')
 
     def _is_valid_handle(self):
         """Returns True if handle is valid, False otherwise."""
@@ -53,10 +54,12 @@ class Tweeter(db.Model):
             if not self._handle_pattern.match(self.handle):
                 raise ValueError(f'handle "{self.handle}" not match pattern')
             valid = True
-        except (TypeError, ValueError) as ex:
+        except Exception as ex:
+            self._messages.append('error validating handle')
             self._messages.append(ex)
-        except:
-            self._messages.append('unknown handle error')
+            self._messages.append(f'handle: {self.handle}')
+            self._messages.append(f'type: {type(self.handle)}')
+            self._messages.append(f'len: {len(self.handle)}')
         finally:
             return valid
 
@@ -71,10 +74,12 @@ class Tweeter(db.Model):
             if not self._name_pattern.match(self.name):
                 raise ValueError(f'name "{self.name}" not match pattern')
             valid = True
-        except (TypeError, ValueError) as ex:
+        except Exception as ex:
+            self._messages.append('error validating name')
             self._messages.append(ex)
-        except:
-            self._messages.append('unknown name error')
+            self._messages.append(f'name: {self.name}')
+            self._messages.append(f'type: {type(self.name)}')
+            self._messages.append(f'len: {len(self.name)}')
         finally:
             return valid
 
@@ -113,10 +118,11 @@ class Tweet(db.Model):
                 raise TypeError('tweeter_id is not int')
             # TO DO: check if tweeter_id in Tweeter table
             valid = True
-        except (TypeError, ValueError) as ex:
+        except Exception as ex:
+            self._messages.append('error validating tweeter_id')
             self._messages.append(ex)
-        except:
-            self._messages.append('unknown tweeter_id error')
+            self._messages.append(f'tweeter_id: {self.tweeter_id}')
+            self._messages.append(f'type: {type(self.tweeter_id)}')
         finally:
             return valid
 
@@ -131,10 +137,12 @@ class Tweet(db.Model):
             if not self._content_pattern.match(self.content):
                 raise ValueError(f'content "{self.content}" no match pattern"')
             valid = True
-        except (TypeError, ValueError) as ex:
+        except Exception as ex:
+            self._messages.append('error validating content')
             self._messages.append(ex)
-        except:
-            self._messages.append('unknown content error')
+            self._messages.append(f'content: {self.content}')
+            self._messages.append(f'type: {type(self.content)}')
+            self._messages.append(f'len: {len(self.content)}')
         finally:
             return valid
 
