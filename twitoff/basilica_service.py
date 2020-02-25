@@ -3,7 +3,6 @@
 import os
 
 import basilica
-
 from dotenv import load_dotenv
 
 # establish environment
