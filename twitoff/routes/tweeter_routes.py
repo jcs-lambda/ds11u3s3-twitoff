@@ -4,10 +4,23 @@ import os
 
 from flask import Blueprint, render_template, request, send_from_directory
 
-from twitoff.models import Tweeter, db, get_all, HANDLE_PATTERN
+from twitoff.models import Tweet, Tweeter, db
 
 tweeter_routes = Blueprint('tweeter_routes', __name__)
 
+
+def get_all_with_num_tweets():
+    """Returns rows from tweeter table as list of dicts."""
+    rows = []
+    for row in Tweeter.query.all():
+        r = {
+            'handle': row.handle,
+            'name': row.name,
+            'tweeter_url': '/tweeter/' + row.handle,
+            'num_tweets': Tweet.query.filter_by(tweeter_id=row.id).count()
+        }
+        rows.append(r)
+    return rows
 
 @tweeter_routes.route('/tweeter/')
 @tweeter_routes.route('/tweeter', methods=['GET', 'POST'])
@@ -16,18 +29,21 @@ def tweeter():
     messages = []
     if request.method == "POST":
         handle = request.form['handle']
-        if (handle is not None and isinstance(handle, str)
-            and HANDLE_PATTERN.match(handle)
-            and Tweeter.query.filter_by(handle=handle).first() is None):
-                new_tweeter = Tweeter(handle)
+        new_tweeter = Tweeter(
+            handle=handle,
+            name='TODO: get name from twitter'
+        )
+        if not new_tweeter.valid:
+            messages = messages + new_tweeter.messages
+        elif Tweeter.query.filter_by(handle=handle).first() is None:
                 db.session.add(new_tweeter)
                 db.session.commit()
         else:
-            message = 'Missing or invalid handle.'
+            message = f'tweeter "{handle}" already exists.'
             messages.append(message)
     return render_template(
         'tweeter.html',
-        tweeters=get_all(Tweeter),
+        tweeters=get_all_with_num_tweets(),
         messages=messages
     )
 
