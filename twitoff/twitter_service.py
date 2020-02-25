@@ -22,10 +22,21 @@ assert TWITTER_ACCESS_TOKEN_SECRET is not None, \
 
 
 def twitter_api():
-    auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_KEY_SECRET)
-    auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
-    api = tweepy.API(auth)
-    return api
+    """Returns an authenticated tweepy.API instance."""
+    try:
+        auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_KEY_SECRET)
+        auth.set_access_token(TWITTER_ACCESS_TOKEN,
+                              TWITTER_ACCESS_TOKEN_SECRET)
+        api = tweepy.API(auth)
+    except tweepy.error.TweepError as ex:
+        print(ex)
+        print(ex.response.text)
+        api = None
+    except Exception as ex:
+        print(ex)
+        api = None
+    finally:
+        return api
 
 
 if __name__ == '__main__':
