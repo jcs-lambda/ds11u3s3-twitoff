@@ -1,6 +1,7 @@
 # ds11u3s3-twitoff
 DS11 Unit 3 Sprint 3 - Twitter Face-Off
 
+## How to use
 ### Obtain API keys
 [AlphaVantage](https://www.alphavantage.co/support/#api-key)
 
@@ -37,4 +38,15 @@ FLASK_APP=twitoff flask db upgrade
 FLASK_APP=twitoff flask run
 ```
 
-[Browse your local app](http://127.0.0.1:5000/)
+###[Browse your local app](http://127.0.0.1:5000/)
+
+## References
+https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object
+
+https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
+
+http://docs.tweepy.org/en/latest/api.html#api-reference
+
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
+
+
