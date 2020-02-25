@@ -19,7 +19,14 @@
         {% endif %}
         <li>
             <form action="/tweeter" method="POST">
-                <input type="text" name="tweeter">
+                <label for="handle">Handle:</label>
+                <input type="text" name="handle"
+                    maxlength="15" pattern="^[a-zA-Z0-9_]+$"
+                    title="max 15 alpha-numeric and _ characters"
+                    required
+                >
+                <!-- <label for="name">Name:</label>
+                <input type="text" name="name" maxlength="50"> -->
             </form>
         </li>
     </ul>

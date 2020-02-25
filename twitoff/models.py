@@ -1,5 +1,7 @@
 """Database"""
 
+import re
+
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -24,6 +26,7 @@ def get_all(table):
         rows.append(r)
     return rows
 
+HANDLE_PATTERN = re.compile('^[a-zA-Z0-9_]{1,15}$')
 
 class Tweeter(db.Model):
     """Tweeter table"""
@@ -32,6 +35,17 @@ class Tweeter(db.Model):
     handle = db.Column(db.String(15), unique=True, nullable=False)
     name = db.Column(db.String(50))
     tweets = db.relationship('Tweet', backref='tweeter', lazy=True)
+
+    def __init__(self, handle:str, name:str =None, **kwargs):
+        """Initialize and instance with a (required) handle and name."""
+        super(Tweeter, self).__init__(**kwargs)
+        if name is not None:
+            assert isinstance(name, str)
+            assert len(name) <= 50
+        assert isinstance(handle, str)
+        assert  bool(HANDLE_PATTERN.match(handle)) == True
+        self.handle = handle
+        self.name = name
 
 
 class Tweet(db.Model):
