@@ -7,8 +7,8 @@ https://www.alphavantage.co/documentation/#daily
 
 import json
 import os
-import requests
 
+import requests
 from dotenv import load_dotenv
 
 # establish environment
@@ -18,15 +18,19 @@ assert ALPHAVANTAGE_KEY is not None, \
     'falied to load ALPHAVANTAGE_KEY from environment'
 
 
-request_url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=TSLA&interval=5min&apikey={ALPHAVANTAGE_KEY}'
-print(request_url)
+def get_symbol_data(symbol: str = 'TSLA'):
+    """Returns dict of the json data returned for symbol."""
+    request_url = 'https://www.alphavantage.co/query'
+    request_url += '?function=TIME_SERIES_INTRADAY'
+    request_url += f'&symbol={symbol}&interval=5min'
+    request_url += f'&apikey={ALPHAVANTAGE_KEY}'
+    with requests.get(request_url) as r:
+        if r.status_code != 200:
+            return r.status_code
+        return json.loads(r.text)
 
-response = requests.get(request_url)
-print(type(response))
-print(response.status_code)
-print(response.text)
 
-data = json.loads(response.text)
-print(type(data))
-print(data.keys())
-
+if __name__ == '__main__':
+    data = get_symbol_data()
+    print(data)
+    print(data.keys())
