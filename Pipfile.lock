@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b216a0912412700231f6d2b848f739561148eebaa0163d69d6420b826b291165"
+            "sha256": "4c6641664181f59eb4b87accf7464a393dca145d769c9fa36886342f7b619ea6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -209,6 +209,7 @@
                 "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee",
                 "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
             ],
+            "index": "pypi",
             "version": "==2.23.0"
         },
         "requests-oauthlib": {
@@ -260,7 +261,7 @@
                 "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0",
                 "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"
             ],
-            "markers": "sys_platform == 'darwin'",
+            "markers": "platform_system == 'Darwin'",
             "version": "==0.1.0"
         },
         "autopep8": {

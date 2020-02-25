@@ -14,6 +14,7 @@ flask-migrate = "*"
 basilica = "*"
 tweepy = "*"
 python-dotenv = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
