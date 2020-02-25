@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 # establish environment
 assert load_dotenv(), 'failed to initialize environment'
 BASILICA_KEY = os.getenv('BASILICA_KEY')
-assert BASILICA_KEY is not None, 'falied to load BASILICA_KEY from environment'
+assert BASILICA_KEY is not None, \
+    'falied to load BASILICA_KEY from environment'
 
 
 def basilica_api():
