@@ -22,6 +22,7 @@ def get_all_with_num_tweets():
         rows.append(r)
     return rows
 
+
 @tweeter_routes.route('/tweeter/')
 @tweeter_routes.route('/tweeter', methods=['GET', 'POST'])
 def tweeter():
@@ -36,8 +37,8 @@ def tweeter():
         if not new_tweeter.valid:
             messages = messages + new_tweeter.messages
         elif Tweeter.query.filter_by(handle=handle).first() is None:
-                db.session.add(new_tweeter)
-                db.session.commit()
+            db.session.add(new_tweeter)
+            db.session.commit()
         else:
             message = f'tweeter "{handle}" already exists.'
             messages.append(message)

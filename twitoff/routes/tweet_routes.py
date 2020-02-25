@@ -22,6 +22,7 @@ def get_all_with_name():
         rows.append(r)
     return rows
 
+
 @tweet_routes.route('/tweets/')
 @tweet_routes.route('/tweet/')
 def tweet():
