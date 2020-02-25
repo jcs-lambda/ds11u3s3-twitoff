@@ -35,5 +35,11 @@
         <a href="javascript:alert('TO DO');">Reset Tweeters</a>
     </p>
     {% endif %}
+    {% if messages %}
+    <hr>
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
 </body>
 </html>
