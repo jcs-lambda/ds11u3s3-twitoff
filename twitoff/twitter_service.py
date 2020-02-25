@@ -3,7 +3,6 @@
 import os
 
 import tweepy
-
 from dotenv import load_dotenv
 
 # establish environment
@@ -22,21 +21,26 @@ assert TWITTER_ACCESS_TOKEN_SECRET is not None, \
     'falied to load TWITTER_ACCESS_TOKEN_SECRET from environment'
 
 
-auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
-auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+def twitter_api():
+    auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
+    auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
+    return api
 
-api = tweepy.API(auth)
 
-print('PUBLIC TWEETS')
-public_tweets = api.home_timeline()
-for tweet in public_tweets:
-    print(type(tweet))
-    print(tweet.text)
-print('-'*30)
+if __name__ == '__main__':
+    api = twitter_api()
+    print('PUBLIC TWEETS')
+    public_tweets = api.home_timeline()
+    for tweet in public_tweets:
+        print(type(tweet))
+        print(tweet.text)
+    print('-'*30)
 
-print('USER INFO')
-user = api.get_user('Chrisalbon')
-print(type(user))
-print(user)
-print(dir(user))
-
+    print('USER INFO')
+    user = api.get_user('Chrisalbon')
+    print(type(user))
+    print('Screen name:', user.screen_name)
+    print('Name:', user.name)
+    print('Location:', user.location)
+    print('Follower count:', user.followers_count)
