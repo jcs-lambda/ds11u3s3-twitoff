@@ -2,40 +2,51 @@
 
 import re
 
+from datetime import datetime
+
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-HANDLE_PATTERN = re.compile('^[a-zA-Z0-9_]{1,15}$')
+from twitoff.twitter_service import get_user, get_timeline
 
 db = SQLAlchemy()
 migrate = Migrate()
 
 
-def get_all(table):
-    """Returns all rows of table_class as a list of dicts.
+def create_tweet():
+    pass
 
+
+def create_tweeter(screen_name:str):
+    """Returns an instance of Tweeter.
+    
     Parameters:
 
-    table: SQLAlchemy Model
+    screen_name: str, a Twitter screen name.
 
     Returns:
-    list of dicts
+    An instance of Tweeter populated with data from Twitter,
+    or None if an cannot get info from Twitter.
     """
-    rows = []
-    for row in table.query.all():
-        r = row.__dict__
-        del r['_sa_instance_state']
-        rows.append(r)
-    return rows
+    # tweeter = Tweeter.get
+    twitter_user = get_user(screen_name)
+    if twitter_user is None:
+        return None
+    
+    # tweeter = Tweeter.query.
 
 
 class Tweeter(db.Model):
     """Tweeter table"""
     __tablename__ = 'tweeter'
     # fields
-    id = db.Column(db.Integer, primary_key=True)
-    handle = db.Column(db.String(15), unique=True, nullable=False)
-    name = db.Column(db.String(50))
+    id = db.Column(db.BigInteger, primary_key=True)
+    id_str = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String)
+    screen_name = db.Column(db.String, unique=True, nullable=False)
+    followers_count = db.Column(db.Integer)
+    statuses_count = db.Column(db.Integer)
+    latest_status_id = db.Column(db.BigInteger)
     # back references
     tweets = db.relationship('Tweet', backref='tweeter', lazy=True)
     # validation properties
@@ -100,10 +111,14 @@ class Tweet(db.Model):
     """Tweet table"""
     __tablename__ = 'tweet'
     # fields
-    id = db.Column(db.Integer, primary_key=True)
-    tweeter_id = db.Column(db.Integer(), db.ForeignKey('tweeter.id'),
+    id = db.Column(db.BigInteger, primary_key=True)
+    id_str = db.Column(db.String, unique=True, nullable=False)
+    text = db.Column(db.String, nullable=False)
+    tweeter_id = db.Column(db.BigInteger, db.ForeignKey('tweeter.id'),
                            nullable=False)
-    content = db.Column(db.String(280), nullable=False)
+    retrieved = db.Column(db.DateTime, nullable=False,
+                          default=datetime.utcnow)
+    embedding = db.Column(db.PickleType)
     # validation properties
     _messages = []
     _content_pattern = re.compile('^.{1,280}$')

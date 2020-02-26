@@ -39,6 +39,66 @@ def twitter_api():
         return api
 
 
+def get_timeline(screen_name: str, since_id=None):
+    """Returns list of tweepy.models.Status instances for a given screen name.
+
+    Returns empty list if an error occurs or the name cannot be found.
+    """
+    if (screen_name is None
+        or not isinstance(screen_name, str)
+        or screen_name == ''
+    ):
+        print('twitter_service.get_timeline: invalid screen_name:')
+        print(screen_name)
+        return None
+    try:
+        results = twitter_api().user_timeline(
+            screen_name=screen_name,
+            since_id=since_id,
+            tweet_mode='extended',
+            count=200,
+            exclude_replies=True,
+            include_rts=False
+        )
+        results = list(results)
+    except tweepy.error.TweepError as ex:
+        print('twitter_service.get_user:TWEEPY ERROR:')
+        print(ex)
+        results = []
+    except Exception as ex:
+        print('twitter_service.get_user:ERROR:')
+        print(ex)
+        results = []
+    finally:
+        return results
+        
+
+def get_user(screen_name: str):
+    """Returns a tweepy.models.User instance for a given screen name.
+
+    Returns None if an error occurs or the name cannot be found.
+    """
+    if (screen_name is None
+        or not isinstance(screen_name, str)
+        or screen_name == ''
+    ):
+        print('twitter_service.get_user: invalid screen_name:')
+        print(screen_name)
+        return None
+    try:
+        user = twitter_api().get_user(screen_name=screen_name)
+    except tweepy.error.TweepError as ex:
+        print('twitter_service.get_user:TWEEPY ERROR:')
+        print(ex)
+        user = None
+    except Exception as ex:
+        print('twitter_service.get_user:ERROR:')
+        print(ex)
+        user = None
+    finally:
+        return user
+        
+
 if __name__ == '__main__':
     api = twitter_api()
     print('PUBLIC TWEETS')

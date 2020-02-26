@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TwitOff{% if title %} - {{ title }}{% endif %}</title>
+    <style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>TwitOff{% if title %} - {{ title }}{% endif %}</h1>
+        <a href="/">Main</a> <a href="/tweeters">Tweeters</a> <a href="/tweets">Tweets</a>
+        <hr>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% if messages %}
+    <div id="messages">
+        <hr>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}    
+    <div id="footer">
+        <hr>
+        <p>This project's <a href="https://github.com/jcs-lambda/ds11u3s3-twitoff">git repository</a>.</p>
+    </div>
+</body>
+</html>

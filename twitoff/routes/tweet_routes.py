@@ -4,7 +4,7 @@ import os
 
 from flask import Blueprint, render_template, send_from_directory
 
-from twitoff.models import Tweet, db, get_all
+from twitoff.models import Tweet, db
 
 tweet_routes = Blueprint('tweet_routes', __name__)
 
