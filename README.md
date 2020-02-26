@@ -49,4 +49,7 @@ http://docs.tweepy.org/en/latest/api.html#api-reference
 
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
 
+https://jinja.palletsprojects.com/en/2.11.x/templates/#list-of-control-structures
+
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/
 
