@@ -14,9 +14,7 @@ from twitoff.routes.twitter_routes import twitter_routes
 
 assert load_dotenv(), 'falied to initialize environment'
 SECRET_KEY = os.getenv('SECRET_KEY')
-DB_FILE = os.path.join(
-    os.path.dirname(__file__), '..', 'twitoff.db'
-)
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 def create_app():
@@ -29,7 +27,7 @@ def create_app():
     app.config['SECRET_KEY'] = SECRET_KEY
 
     # configure database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DB_FILE
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     db.init_app(app)
     migrate.init_app(app, db)
 
