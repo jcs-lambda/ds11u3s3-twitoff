@@ -13,29 +13,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-def create_tweet():
-    pass
-
-
-def create_tweeter(screen_name:str):
-    """Returns an instance of Tweeter.
-    
-    Parameters:
-
-    screen_name: str, a Twitter screen name.
-
-    Returns:
-    An instance of Tweeter populated with data from Twitter,
-    or None if an cannot get info from Twitter.
-    """
-    # tweeter = Tweeter.get
-    twitter_user = get_user(screen_name)
-    if twitter_user is None:
-        return None
-    
-    # tweeter = Tweeter.query.
-
-
 class Tweeter(db.Model):
     """Tweeter table"""
     __tablename__ = 'tweeter'

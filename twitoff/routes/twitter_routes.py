@@ -1,9 +1,9 @@
 """Twitter routes (FLASK)."""
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,url_for
 
 from twitoff.basilica_service import basilica_api
-from twitoff.models import Tweeter, Tweet, db, create_tweet, create_tweeter
+from twitoff.models import Tweeter, Tweet, db
 from twitoff.twitter_service import twitter_api, get_user, get_timeline
 
 twitter_routes = Blueprint('twitter_routes', __name__)
@@ -16,6 +16,7 @@ def get_all_tweeters():
     for tweeter in all_tweeters:
         t = tweeter.__dict__
         del t['_sa_instance_state']
+        # t['stored_count'] = Tweet.query.filter_by(tweeter_id=t['id']).count()
         tweeters.append(t)
     return render_template(
         'tweeter.html',
@@ -53,7 +54,7 @@ def get_tweeter(screen_name=None):
                     id_str=tweet.id_str,
                     text=tweet.full_text,
                     tweeter_id=tweeter['id'],
-                    embedding=list(basilica_api().embed_sentence(tweet.full_text))
+                    embedding=list(basilica_api().embed_sentence(tweet.full_text, model='twitter'))
                 )
                 db.session.add(tweet)
             db.session.commit()

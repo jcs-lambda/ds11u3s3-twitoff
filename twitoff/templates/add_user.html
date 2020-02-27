@@ -1,0 +1,32 @@
+{% block action %}
+<form action="" method="POST">
+    <fieldset>
+        {% if tweeters|length < 2 %}
+            <legend>Not Enough Tweeters - Add One</legend>
+        {% else %}
+            <legend>Add A Tweeter</legend>
+        {% endif %}
+        <div class="form-group">
+            <label for="screen_name">Screen Name:</label>
+            <input type="text" name="screen_name"
+            placeholder="rrherr" required maxlength="30"
+            pattern="^[a-zA-Z0-9_]+$"
+            title="Twitter screen name: only alpha-numeric and _"
+            >
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add User">
+        </div>
+    </fieldset>
+</form>
+{% if tweeters %}
+<h3>Current Tweeters</h3>
+<ul>
+    {% for tweeter in tweeters %}
+    <li><a href="/tweeters/{{ tweeter }}">
+        {{ tweeter }}
+    </a></li>
+    {% endfor %}    
+</ul>
+{% endif %}
+{% endblock %}

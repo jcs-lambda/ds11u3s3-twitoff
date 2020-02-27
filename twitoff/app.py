@@ -2,7 +2,8 @@
 
 import os
 
-from flask import Flask
+from dotenv import load_dotenv
+from flask import Flask, url_for
 
 from twitoff.models import db, migrate
 from twitoff.routes.home_routes import home_routes
@@ -11,6 +12,8 @@ from twitoff.routes.tweet_routes import tweet_routes
 from twitoff.routes.tweeter_routes import tweeter_routes
 from twitoff.routes.twitter_routes import twitter_routes
 
+assert load_dotenv(), 'falied to initialize environment'
+SECRET_KEY = os.getenv('SECRET_KEY')
 DB_FILE = os.path.join(
     os.path.dirname(__file__), '..', 'twitoff.db'
 )
@@ -23,6 +26,7 @@ def create_app():
     Flask application instance.
     """
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = SECRET_KEY
 
     # configure database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DB_FILE
@@ -34,6 +38,6 @@ def create_app():
     # app.register_blueprint(tweet_routes)
     # app.register_blueprint(tweeter_routes)
     app.register_blueprint(twitter_routes)
-    app.register_blueprint(iris_routes)
+    # app.register_blueprint(iris_routes)
 
     return app

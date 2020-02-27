@@ -3,7 +3,7 @@
 Demonstrate serialization of predictive model.
 """
 
-from flask import Blueprint
+from flask import Blueprint, url_for
 from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 

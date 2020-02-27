@@ -4,29 +4,10 @@
 <p>TwitOff is a machine learning web application that tries to determine which
     twitter user was most likely to have tweeted an arbitrary tweet.
 </p>
-<form action="/" method="POST">
-    <datalist id="tweeters">
-        {% for tweeter in tweeters %}
-        <option value="{{ tweeter }}"></option>
-        {% endfor %}
-    </datalist>
-    <label for="tweeter1">Tweeter 1:</label>
-    <input type="text" name="tweeter1" list="tweeters"
-        placeholder="rrherr" required maxlength="30"
-        pattern="^[a-zA-Z0-9_]+$"
-        title="Twitter screen name: only alpha-numeric and _"
-    ><br>
-    <label for="tweeter2">Tweeter 2:</label>
-    <input type="text" name="tweeter2" list="tweeters"
-        placeholder="s2t2" required maxlength="30"
-        pattern="^[a-zA-Z0-9_]+$"
-        title="Twitter screen name: only alpha-numeric and _"
-    ><br>
-    <label for="tweet">Tweet:</label>
-    <input type="text" name="tweet" required maxlength="240"
-        placeholder="banjos are cool" size="80"
-        title="Arbitrary Tweet"
-    ><br>
-    <input type="submit" value="Submit">
-</form>
+{% block action %}
+    {% if tweeters|length > 2 %}
+        <div>{% include "predict.html" %}</div><br>
+    {% endif %}
+    <div>{% include "add_user.html" %}</div>
+{% endblock %}
 {% endblock %}

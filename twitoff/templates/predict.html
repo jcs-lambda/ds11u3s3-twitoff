@@ -1,0 +1,47 @@
+{% block action %}
+<form action="/prediction" method="POST">
+    <fieldset>
+        <legend>Which tweeter would most likely tweet?</legend>
+        <div class="form-group">
+            <label for="tweeter1">Tweeter 1:</label>
+            <select name="tweeter1" id="tweeter1">
+                {% for tweeter in tweeters %}
+                <option value="{{ tweeter }}">{{ tweeter }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tweeter2">Tweeter 2:</label>
+            <select name="tweeter2" id="tweeter2">
+                {% for tweeter in tweeters %}
+                <option value="{{ tweeter }}">{{ tweeter }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tweet">Tweet:</label>
+            <input type="text" name="tweet" required maxlength="240"
+                placeholder="banjos are cool" size="80"
+                title="Arbitrary Tweet">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </fieldset>
+    <!-- <datalist id="tweeters">
+        {% for tweeter in tweeters %}
+        <option value="{{ tweeter }}"></option>
+        {% endfor %}
+    </datalist>
+    <input type="text" name="tweeter1" list="tweeters"
+        placeholder="rrherr" required maxlength="30"
+        pattern="^[a-zA-Z0-9_]+$"
+        title="Twitter screen name: only alpha-numeric and _"
+    ><br>
+    <input type="text" name="tweeter2" list="tweeters"
+        placeholder="s2t2" required maxlength="30"
+        pattern="^[a-zA-Z0-9_]+$"
+        title="Twitter screen name: only alpha-numeric and _"
+    ><br> -->
+</form>
+{% endblock %}
