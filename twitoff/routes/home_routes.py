@@ -36,6 +36,10 @@ def home_post():
         return redirect(url_for('twitter_routes.get_tweeter',
                                 screen_name=request.form['screen_name']))
     else:
+        return render_template(
+            'home.html',
+            title=''
+        )
         return redirect(url_for('home_routes.home_get'))
 
 
@@ -107,8 +111,10 @@ def reset_get():
     db.drop_all()
     db.create_all()
     # db.session.commit()
+    tweeters = [tweeter.screen_name for tweeter in Tweeter.query.all()]
     return render_template(
         'home.html',
         title='Reset',
         messages=['Database Reset Complete.']
+        tweeters=sorted(tweeters)
     )
