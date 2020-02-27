@@ -17,9 +17,7 @@ home_routes = Blueprint('home_routes', __name__)
 @home_routes.route('/', methods=['GET'])
 def home_get():
     """Handle home page GET request."""
-    tweeters = []
-    for tweeter in Tweeter.query.all():
-        tweeters.append(tweeter.screen_name)
+    tweeters = [tweeter.screen_name for tweeter in Tweeter.query.all()]
     return render_template(
         'home.html',
         tweeters=sorted(tweeters),
