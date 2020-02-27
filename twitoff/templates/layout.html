@@ -24,12 +24,15 @@ td.not_winner {
     text-align: center;
     width: 50%;
 }
+span.winner {
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
     <div id="header">
         <h1>TwitOff{% if title %} - {{ title }}{% endif %}</h1>
-        <a href="/">Main</a> <a href="/tweeters/">Tweeters</a>
+        <a href="/">Main</a> <a href="/tweeters/">Tweeters</a> <a href="/reset">Reset</a>
         <hr>
     </div>
     <div id="content">
@@ -46,7 +49,7 @@ td.not_winner {
     {% endif %}    
     <div id="footer">
         <hr>
-        <p>This project's <a href="https://github.com/jcs-lambda/ds11u3s3-twitoff">git repository</a>.</p>
+        <p>View this project's source code <a href="https://github.com/jcs-lambda/ds11u3s3-twitoff">on GitHub</a>.</p>
     </div>
 </body>
 </html>
