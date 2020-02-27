@@ -16,6 +16,7 @@ tweepy = "*"
 python-dotenv = "*"
 requests = "*"
 scikit-learn = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.7"
