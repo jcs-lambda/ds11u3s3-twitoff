@@ -1,5 +1,9 @@
 {% block content %}
-<table>
+<fieldset>
+    <legend>Predicted Tweeter: <span class="winner">{{ winner }}</span></legend>
+    <p>{{ tweet }}</p>
+</fieldset>
+<!-- <table>
     <thead>
         <tr>
             <th colspan="2" class="tweet">{{ tweet }}</th>
@@ -33,5 +37,5 @@
     is more likely than
     {% if selected_1 == winner %}{{ selected_2 }}{% else %}{{ selected_1 }}{% endif %}
     to have tweeted: "{{ tweet }}"
-</p>
+</p> -->
 {% endblock %}
