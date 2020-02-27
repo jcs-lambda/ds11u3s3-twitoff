@@ -36,11 +36,18 @@ def home_post():
         return redirect(url_for('twitter_routes.get_tweeter',
                                 screen_name=request.form['screen_name']))
     else:
+        messages = [
+            'screen_name not in POST request',
+            str(jsonify(request.form))
+        ]
+        tweeters = [tweeter.screen_name for tweeter in Tweeter.query.all()]
         return render_template(
             'home.html',
-            title=''
+            title='POST ERROR',
+            messages=messages,
+            tweeters=sorted(tweeters)
         )
-        return redirect(url_for('home_routes.home_get'))
+        # return redirect(url_for('home_routes.home_get'))
 
 
 @home_routes.route('/prediction', methods=["POST"])
