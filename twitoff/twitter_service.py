@@ -59,7 +59,7 @@ def get_timeline(screen_name: str, since_id=None):
             screen_name=screen_name,
             since_id=since_id,
             tweet_mode='extended',
-            count=200,
+            count=2000,
             exclude_replies=True,
             include_rts=False
         )
