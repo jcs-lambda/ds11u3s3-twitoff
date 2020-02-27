@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# populate twitoff with top 50 twitter handles (from wikipedia)
+
+TWITOFF_HOST='http://127.0.0.1:5000/tweeters/'
+[[ ${1} -eq "REMOTE" ]] && TWITOFF_HOST='https://twitoff-jcslambda.herokuapp.com/tweeters/'
+
+while read HANDLE ; do
+    URL=${TWITOFF_HOST}${HANDLE}
+    echo ${URL}
+    curl ${URL} > /dev/null
+done <<EOF
 BarackObama
 justinbieber
 katyperry
