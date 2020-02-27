@@ -7,15 +7,12 @@
 <p>Number of followers: {{ tweeter['followers_count'] }}</p>
 <p>Number of tweets: {{ tweeter['statuses_count'] }}</p>
     {% if tweets %}
-    <p><a href="/tweeters/{{ tweeter['name'] }}/reset">Reload Tweets</a></p>
     <h3>{{ tweets|length }} stored tweets</h3>
     <ul>
         {% for tweet in tweets %}
         <li><p>{{ tweet }}</p></li>
         {% endfor %}
     </ul>
-    {% else %}
-    <!-- <p><a href="/tweeters/{{ tweeter['name'] }}/reset">Load Tweets</a></p> -->
     {% endif %}
 {% else %}
 <h2>No tweeter supplied.</h2>

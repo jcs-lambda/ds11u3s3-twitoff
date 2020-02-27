@@ -3,39 +3,4 @@
     <legend>Predicted Tweeter: <span class="winner">{{ winner }}</span></legend>
     <p>{{ tweet }}</p>
 </fieldset>
-<!-- <table>
-    <thead>
-        <tr>
-            <th colspan="2" class="tweet">{{ tweet }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td
-            {% if selected_1 == winner %}
-                class="winner"
-            {% else %}
-                class="not_winner"
-            {% endif %}
-            >
-                {{ selected_1 }}
-            </td>
-            <td
-            {% if selected_2 == winner %}
-                class="winner"
-            {% else %}
-                class="not_winner"
-            {% endif %}
-            >
-                {{ selected_2 }}
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<p>{% if selected_1 == winner %}{{ selected_1 }}{% else %}{{ selected_2 }}{% endif %}
-    is more likely than
-    {% if selected_1 == winner %}{{ selected_2 }}{% else %}{{ selected_1 }}{% endif %}
-    to have tweeted: "{{ tweet }}"
-</p> -->
 {% endblock %}

@@ -8,7 +8,6 @@ from flask import (Blueprint, jsonify, redirect, render_template, request,
 from sklearn.linear_model import LogisticRegression
 
 from twitoff.basilica_service import basilica_api
-from twitoff.forms import AddTweeterForm, PredictForm
 from twitoff.models import Tweet, Tweeter, db
 
 home_routes = Blueprint('home_routes', __name__)
@@ -21,8 +20,6 @@ def home_get():
     return render_template(
         'home.html',
         tweeters=sorted(tweeters),
-        form_add_tweeter=AddTweeterForm(),
-        form_predict=PredictForm(),
     )
 
 
@@ -45,7 +42,6 @@ def home_post():
             messages=messages,
             tweeters=sorted(tweeters)
         )
-        # return redirect(url_for('home_routes.home_get'))
 
 
 @home_routes.route('/prediction', methods=["POST"])
@@ -103,11 +99,6 @@ def prediction_post():
 def favicion():
     """Returns favicon.ico from static directory."""
     return redirect(url_for('static', filename='favicon.ico'))
-    # return send_from_directory(
-    #     os.path.join(os.path.join(app.root_path, 'static')),
-    #     'favicon.ico',
-    #     mimetype='image/vnd.microsoft.icon'
-    # )
 
 
 @home_routes.route('/reset')
