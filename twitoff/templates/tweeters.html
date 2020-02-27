@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if tweeters %}
+<table>
+    <thead>
+        <tr>
+            <th>Screen Name</th>
+            <th>Name</th>
+            <th>Followers</th>
+            <th>Tweets</th>
+            <!-- <th>Tweets Stored</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for tweeter in tweeters %}
+        <tr>
+            <td><a href="/tweeters/{{ tweeter['screen_name'] }}">
+                {{ tweeter['screen_name'] }}
+            </a></td>
+            <td>{{ tweeter['name'] }}</td>
+            <td>{{ tweeter['followers_count'] }}</td>
+            <td>{{ tweeter['statuses_count'] }}</td>
+            <!-- <td>{{ tweeter['stored_count'] }}</td> -->
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>No tweeters in database.</h2>
+{% endif %}
+{% endblock %}

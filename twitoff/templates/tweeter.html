@@ -7,39 +7,17 @@
 <p>Number of followers: {{ tweeter['followers_count'] }}</p>
 <p>Number of tweets: {{ tweeter['statuses_count'] }}</p>
     {% if tweets %}
+    <p><a href="/tweeters/{{ tweeter['name'] }}/reset">Reload Tweets</a></p>
     <h3>{{ tweets|length }} stored tweets</h3>
     <ul>
         {% for tweet in tweets %}
         <li><p>{{ tweet }}</p></li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p><a href="/tweeters/{{ tweeter['name'] }}/reset">Load Tweets</a></p>
     {% endif %}
-{% elif tweeters %}
-<table>
-    <thead>
-        <tr>
-            <th>Screen Name</th>
-            <th>Name</th>
-            <th>Followers</th>
-            <th>Tweets</th>
-            <!-- <th>Tweets Stored</th> -->
-        </tr>
-    </thead>
-    <tbody>
-        {% for tweeter in tweeters %}
-        <tr>
-            <td><a href="/tweeters/{{ tweeter['screen_name'] }}">
-                {{ tweeter['screen_name'] }}
-            </a></td>
-            <td>{{ tweeter['name'] }}</td>
-            <td>{{ tweeter['followers_count'] }}</td>
-            <td>{{ tweeter['statuses_count'] }}</td>
-            <!-- <td>{{ tweeter['stored_count'] }}</td> -->
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% else %}
-<h2>No tweeters in database.</h2>
+<h2>No tweeter supplied.</h2>
 {% endif %}
 {% endblock %}
