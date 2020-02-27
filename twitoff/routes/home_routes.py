@@ -99,3 +99,16 @@ def favicion():
     #     'favicon.ico',
     #     mimetype='image/vnd.microsoft.icon'
     # )
+
+
+@home_routes.route('/reset')
+def reset_get():
+    """Resets the database."""
+    db.drop_all()
+    db.create_all()
+    # db.session.commit()
+    return render_template(
+        'home.html',
+        title='Reset',
+        messages=['Database Reset Complete.']
+    )
