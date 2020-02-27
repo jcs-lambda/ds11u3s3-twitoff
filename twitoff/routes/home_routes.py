@@ -111,10 +111,8 @@ def reset_get():
     db.drop_all()
     db.create_all()
     # db.session.commit()
-    tweeters = [tweeter.screen_name for tweeter in Tweeter.query.all()]
     return render_template(
         'home.html',
         title='Reset',
         messages=['Database Reset Complete.']
-        tweeters=sorted(tweeters)
     )
