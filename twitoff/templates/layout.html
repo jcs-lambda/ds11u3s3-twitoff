@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TwitOff{% if title %} - {{ title }}{% endif %}</title>
-    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/static/favicon.ico">
     <style>
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+}
+th.tweet {
+    background-color: darkgoldenrod;
+    text-align: center;
+}
+td.winner {
+    background-color:limegreen;
+    text-align: center;
+    width: 50%;
+}
+td.not_winner {
+    background-color: crimson;
+    text-align: center;
+    width: 50%;
 }
     </style>
 </head>

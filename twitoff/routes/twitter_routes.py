@@ -1,6 +1,6 @@
 """Twitter routes (FLASK)."""
 
-from flask import Blueprint, render_template,url_for
+from flask import Blueprint, render_template, url_for
 
 from twitoff.basilica_service import basilica_api
 from twitoff.models import Tweeter, Tweet, db
@@ -47,23 +47,24 @@ def get_tweeter(screen_name=None):
         del tweeter['_sa_instance_state']
         if Tweet.query.filter_by(tweeter_id=tweeter['id']).first() is None:
             timeline = get_timeline(tweeter['screen_name'])
-            for tweet in timeline:
-                tweets.append(tweet.full_text)
-                tweet = Tweet(
-                    id=tweet.id,
-                    id_str=tweet.id_str,
-                    text=tweet.full_text,
-                    tweeter_id=tweeter['id'],
-                    embedding=list(basilica_api().embed_sentence(tweet.full_text, model='twitter'))
-                )
-                db.session.add(tweet)
+            with basilica_api() as b_api:
+                for tweet in timeline:
+                    tweets.append(tweet.full_text)
+                    tweet = Tweet(
+                        id=tweet.id,
+                        id_str=tweet.id_str,
+                        text=tweet.full_text,
+                        tweeter_id=tweeter['id'],
+                        embedding=list(b_api.embed_sentence(tweet.full_text,
+                                                            model='twitter'))
+                    )
+                    db.session.add(tweet)
             db.session.commit()
         else:
             for tweet in Tweet.query.filter_by(tweeter_id=tweeter['id']).all():
-                tweets.append(tweet.text)         
+                tweets.append(tweet.text)
     return render_template(
         'tweeter.html',
         tweeter=tweeter,
         tweets=tweets
     )
-    

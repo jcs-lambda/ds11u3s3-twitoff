@@ -6,7 +6,11 @@
             <label for="tweeter1">Tweeter 1:</label>
             <select name="tweeter1" id="tweeter1">
                 {% for tweeter in tweeters %}
-                <option value="{{ tweeter }}">{{ tweeter }}</option>
+                    {% if tweeter == selected_1 %}
+                        <option value="{{ tweeter }}" selected>{{ tweeter }}</option>
+                    {% else %}
+                        <option value="{{ tweeter }}">{{ tweeter }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -14,7 +18,11 @@
             <label for="tweeter2">Tweeter 2:</label>
             <select name="tweeter2" id="tweeter2">
                 {% for tweeter in tweeters %}
-                <option value="{{ tweeter }}">{{ tweeter }}</option>
+                    {% if tweeter == selected_2 %}
+                        <option value="{{ tweeter }}" selected>{{ tweeter }}</option>
+                    {% else %}
+                        <option value="{{ tweeter }}">{{ tweeter }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -22,6 +30,9 @@
             <label for="tweet">Tweet:</label>
             <input type="text" name="tweet" required maxlength="240"
                 placeholder="banjos are cool" size="80"
+                {% if tweet %}
+                value="{{ tweet }}"
+                {% endif %}
                 title="Arbitrary Tweet">
         </div>
         <div class="form-group">

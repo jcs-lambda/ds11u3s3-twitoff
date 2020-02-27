@@ -4,6 +4,9 @@
 <p>TwitOff is a machine learning web application that tries to determine which
     twitter user was most likely to have tweeted an arbitrary tweet.
 </p>
+{% if selected_1 and selected_2 and tweet and winner %}
+    <div>{% include "prediction.html" %}</div>
+{% endif %}
 {% block action %}
     {% if tweeters|length > 2 %}
         <div>{% include "predict.html" %}</div><br>
