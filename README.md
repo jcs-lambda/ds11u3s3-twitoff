@@ -1,3 +1,8 @@
+# Archived this repo
+- heroku no longer offering free apps
+- basilica no longer a company
+- dependabot alerts
+
 # ds11u3s3-twitoff
 DS11 Unit 3 Sprint 3 - Twitter Face-Off
 
