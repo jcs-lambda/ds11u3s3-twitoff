@@ -23,6 +23,7 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.8.1"
+
         },
         "basilica": {
             "hashes": [
@@ -576,7 +577,6 @@
             ],
             "markers": "python_version < '3.8'",
             "version": "==4.3.0"
-        },
         "urllib3": {
             "hashes": [
                 "sha256:8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2",
