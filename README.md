@@ -1,13 +1,13 @@
 # ds11u3s3-twitoff
 DS11 Unit 3 Sprint 3 - Twitter Face-Off
 
-# [See This App Live, on Heroku](https://twitoff-jcslambda.herokuapp.com/)
+# [~~See This App Live, on Heroku~~](https://twitoff-jcslambda.herokuapp.com/) (NO MORE FREE TIER APPS)
 
 ## How to use locally
 ### Obtain API keys
 [AlphaVantage](https://www.alphavantage.co/support/#api-key)
 
-[Basilica](https://www.basilica.ai/api-keys/)
+[~~Basilica~~](https://www.basilica.ai/api-keys/) (SHUTDOWN)
 
 [Twitter](https://developer.twitter.com/)
 
